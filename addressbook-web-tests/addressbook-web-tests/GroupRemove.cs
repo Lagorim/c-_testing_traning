@@ -8,24 +8,19 @@ using NUnit.Framework;
 namespace AddressbookTest
 {
     [TestFixture]
-    public class GroupCreation : BaseTest
+    public class RemoveGroup : BaseTest
     {
         
 
         [Test]
-        public void GroupCreationTest()
+        public void RemoveGroupTest()
         {
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
             GoToGroupsPage();
-            InitNewGroupCreation();
-            GroupData group = new GroupData("aaa");
-            group.Header = "bbb";
-            group.Footer = "ccc";
-            FillGroupForm(group);
-            SubmitgroupCreation();
+            SelectedGroup(1);
+            DeleteGroup();
             ReturnToGroupPage();
-            Logout();
-        }
+        }        
     }
 }
