@@ -15,16 +15,11 @@ namespace AddressbookTest
         [Test]
         public void ContactCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            NewContactPage();
             ContactData contact = new ContactData("igor");
             contact.MiddleName = "Victor";
             contact.LastName = "Pronin";
-            CreationContact(contact);
-            SubmitContact();
-            ReturnMainPage();
-            Logout();
+            application.Contacts.Create(contact);
+            //application.Auth.Logout();
         }
     }
 }

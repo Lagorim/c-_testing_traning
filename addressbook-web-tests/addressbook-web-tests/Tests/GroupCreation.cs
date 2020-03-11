@@ -15,17 +15,21 @@ namespace AddressbookTest
         [Test]
         public void GroupCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitNewGroupCreation();
             GroupData group = new GroupData("aaa");
             group.Header = "bbb";
             group.Footer = "ccc";
-            FillGroupForm(group);
-            SubmitgroupCreation();
-            ReturnToGroupPage();
-            Logout();
+            application.Groups.Create(group);
+            //application.Auth.Logout();
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+            application.Groups.Create(group);
+            //application.Auth.Logout();
         }
     }
 }
