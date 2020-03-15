@@ -10,8 +10,6 @@ namespace AddressbookTest
     [TestFixture]
     public class ContactCreation : BaseTest
     {
-        
-
         [Test]
         public void ContactCreationTest()
         {
@@ -19,7 +17,6 @@ namespace AddressbookTest
             contact.MiddleName = "Victor";
             contact.LastName = "Pronin";
             application.Contacts.Create(contact);
-            //application.Auth.Logout();
         }
     }
 }

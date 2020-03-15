@@ -20,10 +20,21 @@ namespace AddressbookTest
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectedGroup(1);
+            SelectedGroup(v);
             DeleteGroup();
             ReturnToGroupPage();
             return this; 
+        }
+
+        public GroupHelper Modify(int v, GroupData modification)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectedGroup(v);
+            InitGroupModification();
+            FillGroupForm(modification);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+            return this;
         }
 
         public GroupHelper Create(GroupData group)
@@ -31,7 +42,7 @@ namespace AddressbookTest
             manager.Navigator.GoToGroupsPage();
             InitNewGroupCreation();
             FillGroupForm(group);
-            SubmitgroupCreation();
+            SubmitGroupCreation();
             ReturnToGroupPage();
             return this;
         }
@@ -67,7 +78,7 @@ namespace AddressbookTest
             return this;
         }
 
-        public GroupHelper SubmitgroupCreation()
+        public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
             return this;
@@ -76,6 +87,18 @@ namespace AddressbookTest
         public GroupHelper ReturnToGroupPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
+            return this;
+        }
+
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
     }

@@ -49,6 +49,19 @@ namespace AddressbookTest
             }
         }
 
+        public void CloseDialogWindow()
+        {
+            try
+            {
+                driver.SwitchTo().Alert();
+                //return true;
+            }
+            catch (NoAlertPresentException)
+            {
+                //return false;
+            }
+        }
+
         public LoginHelper Auth
         {
             get

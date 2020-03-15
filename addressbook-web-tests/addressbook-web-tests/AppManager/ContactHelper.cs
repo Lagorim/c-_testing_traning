@@ -17,12 +17,55 @@ namespace AddressbookTest
         {
         }
 
+        public ContactHelper Remove()
+        {
+            ReturnMainPage();
+            ChoiceModificationContact();
+            EditPressButton();
+            RemoveContact();
+            return this;
+        }
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[3]")).Click();
+            return this;
+        }
+
         public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.NewContactPage();
             CreationContact(contact);
             SubmitContact();
             ReturnMainPage();
+            
+            return this;
+        }
+
+
+
+        public ContactHelper Modification(ContactData contactmodification)
+        {
+            ReturnMainPage();
+            ChoiceModificationContact();
+            EditPressButton();
+            ModificationContact(contactmodification);
+            SubmitModificationContact();
+            ReturnMainPage();
+            return this;
+        }
+
+        public ContactHelper ModificationContact(ContactData contactmodification)
+        {
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contactmodification.Name);            
+            driver.FindElement(By.Name("middlename")).Click();
+            driver.FindElement(By.Name("middlename")).Clear();
+            driver.FindElement(By.Name("middlename")).SendKeys(contactmodification.MiddleName);
+            driver.FindElement(By.Name("lastname")).Click();
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(contactmodification.LastName);
             return this;
         }
 
@@ -51,6 +94,24 @@ namespace AddressbookTest
         public ContactHelper ReturnMainPage()
         {
             driver.FindElement(By.LinkText("home")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitModificationContact()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            return this;
+        }
+
+        public ContactHelper EditPressButton()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+
+        public ContactHelper ChoiceModificationContact()
+        {
+            driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
     }
