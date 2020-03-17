@@ -21,14 +21,13 @@ namespace AddressbookTest
         {
             ReturnMainPage();
             ChoiceModificationContact();
-            EditPressButton();
             RemoveContact();
             return this;
         }
 
         public ContactHelper RemoveContact()
         {
-            driver.FindElement(By.XPath("(//input[@name='update'])[3]")).Click();
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
 
@@ -41,8 +40,6 @@ namespace AddressbookTest
             
             return this;
         }
-
-
 
         public ContactHelper Modification(ContactData contactmodification)
         {

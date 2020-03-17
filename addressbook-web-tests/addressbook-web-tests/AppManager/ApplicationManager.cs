@@ -18,6 +18,7 @@ namespace AddressbookTest
         protected NavigationHelper navigation;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        //protected bool acceptNextAlert;
 
         public ApplicationManager()
         {
@@ -53,12 +54,11 @@ namespace AddressbookTest
         {
             try
             {
-                driver.SwitchTo().Alert();
-                //return true;
+                driver.SwitchTo().Alert().Accept();
             }
             catch (NoAlertPresentException)
             {
-                //return false;
+
             }
         }
 
