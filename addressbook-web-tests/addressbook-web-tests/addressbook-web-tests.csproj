@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="AppManager\ApplicationManager.cs" />
+    <Compile Include="Tests\AuthBaseTest.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Model\ContactData.cs" />
     <Compile Include="AppManager\ContactHelper.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GroupCreation.cs" />
     <Compile Include="Tests\ContactCreation.cs" />
+    <Compile Include="Tests\LoginTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

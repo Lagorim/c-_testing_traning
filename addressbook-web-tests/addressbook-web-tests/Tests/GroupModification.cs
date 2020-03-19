@@ -8,14 +8,14 @@ using NUnit.Framework;
 namespace AddressbookTest
 {
     [TestFixture]
-    public class GroupModification : BaseTest
+    public class GroupModification : AuthBaseTest
     {
         [Test]
         public void ModificationTest()
         {
             GroupData modification = new GroupData("bbb");
-            modification.Header = "ggg";
-            modification.Footer = "poo";
+            modification.Header = null;
+            modification.Footer = null;
             application.Groups.Modify(1, modification);
         }
     }

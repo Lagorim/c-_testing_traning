@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace AddressbookTest
 {
     [TestFixture]
-    public class GroupCreation : BaseTest
+    public class GroupCreation : AuthBaseTest
     {
         
 
@@ -19,7 +19,6 @@ namespace AddressbookTest
             group.Header = "bbb";
             group.Footer = "ccc";
             application.Groups.Create(group);
-            //application.Auth.Logout();
         }
 
         [Test]
@@ -29,7 +28,6 @@ namespace AddressbookTest
             group.Header = "";
             group.Footer = "";
             application.Groups.Create(group);
-            //application.Auth.Logout();
         }
     }
 }

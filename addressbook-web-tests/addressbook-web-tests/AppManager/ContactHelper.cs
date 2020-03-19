@@ -19,7 +19,7 @@ namespace AddressbookTest
 
         public ContactHelper Remove()
         {
-            ReturnMainPage();
+            manager.Navigator.OpenHomePage();
             ChoiceModificationContact();
             RemoveContact();
             return this;
@@ -36,49 +36,38 @@ namespace AddressbookTest
             manager.Navigator.NewContactPage();
             CreationContact(contact);
             SubmitContact();
-            ReturnMainPage();
-            
+            manager.Navigator.NewContactPage();
+
             return this;
         }
 
         public ContactHelper Modification(ContactData contactmodification)
         {
-            ReturnMainPage();
+            manager.Navigator.OpenHomePage();
             ChoiceModificationContact();
             EditPressButton();
             ModificationContact(contactmodification);
             SubmitModificationContact();
-            ReturnMainPage();
+            manager.Navigator.OpenHomePage();
             return this;
         }
 
         public ContactHelper ModificationContact(ContactData contactmodification)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contactmodification.Name);            
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contactmodification.MiddleName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contactmodification.LastName);
+            Type(By.Name("firstname"), contactmodification.Name);
+            Type(By.Name("middlename"), contactmodification.MiddleName);
+            Type(By.Name("lastname"), contactmodification.LastName);
             return this;
         }
 
         public ContactHelper CreationContact(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
-            driver.FindElement(By.Name("theform")).Click();
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.MiddleName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
-            driver.FindElement(By.Name("theform")).Click();
+            By locator = By.Name("theform");
+            Type(By.Name("firstname"), contact.Name);
+            Type(By.Name("middlename"), contact.MiddleName);
+            TypeForContact(By.Name("theform"));
+            Type(By.Name("lastname"), contact.LastName);
+            TypeForContact(By.Name("theform"));
             return this;
         }
 
