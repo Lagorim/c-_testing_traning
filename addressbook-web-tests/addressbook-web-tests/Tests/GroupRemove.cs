@@ -15,7 +15,11 @@ namespace AddressbookTest
         [Test]
         public void RemoveGroupTest()
         {
-            application.Groups.Remove(1);
+            GroupData group = new GroupData("aaa");
+            group.Header = "bbb";
+            group.Footer = "vvv";
+
+            application.Groups.Remove(group, 1);
             
         }        
     }

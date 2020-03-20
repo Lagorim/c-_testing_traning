@@ -11,9 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace AddressbookTest
 {
     public class LoginHelper : HelperBase
-    {
-        
-
+    {       
         public LoginHelper(ApplicationManager manager) : base(manager)
         {
         }

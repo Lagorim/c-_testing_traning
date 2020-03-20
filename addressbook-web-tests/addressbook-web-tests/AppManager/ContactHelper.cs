@@ -17,20 +17,6 @@ namespace AddressbookTest
         {
         }
 
-        public ContactHelper Remove()
-        {
-            manager.Navigator.OpenHomePage();
-            ChoiceModificationContact();
-            RemoveContact();
-            return this;
-        }
-
-        public ContactHelper RemoveContact()
-        {
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-            return this;
-        }
-
         public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.NewContactPage();
@@ -41,14 +27,21 @@ namespace AddressbookTest
             return this;
         }
 
-        public ContactHelper Modification(ContactData contactmodification)
+        public ContactHelper Modification(ContactData contactmodification, ContactData contact)
         {
             manager.Navigator.OpenHomePage();
-            ChoiceModificationContact();
+            ChoiceModificationContact(contact);
             EditPressButton();
             ModificationContact(contactmodification);
             SubmitModificationContact();
             manager.Navigator.OpenHomePage();
+            return this;
+        }
+        public ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.OpenHomePage();
+            ChoiceModificationContact(contact);
+            RemoveContact();
             return this;
         }
 
@@ -95,9 +88,29 @@ namespace AddressbookTest
             return this;
         }
 
-        public ContactHelper ChoiceModificationContact()
+        public ContactHelper ChoiceModificationContact(ContactData contact)
         {
+            if (Selected())
+                {
+                driver.FindElement(By.Name("selected[]")).Click();
+                return this;
+                }
+            manager.Navigator.NewContactPage();
+            CreationContact(contact);
+            SubmitContact();
+            manager.Navigator.OpenHomePage();
             driver.FindElement(By.Name("selected[]")).Click();
+            return this;
+        }
+
+        private bool Selected()
+        {
+            return IsElementPresent(By.XPath("//tr[@name='entry']"));
+        }
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
     }

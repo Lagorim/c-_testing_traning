@@ -13,7 +13,11 @@ namespace AddressbookTest
         [Test]
         public void RemoveContact()
         {
-            application.Contacts.Remove();
+            ContactData contact = new ContactData("igor");
+            contact.MiddleName = "Victor";
+            contact.LastName = "Pronin";
+
+            application.Contacts.Remove(contact);
             application.CloseDialogWindow();
         }
 

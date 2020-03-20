@@ -13,10 +13,14 @@ namespace AddressbookTest
         [Test]
         public void ModificationTest()
         {
-            GroupData modification = new GroupData("bbb");
+            GroupData group = new GroupData("aaa");
+            group.Header = "bbb";
+            group.Footer = "vvv";
+
+            GroupData modification = new GroupData("ccc");
             modification.Header = null;
             modification.Footer = null;
-            application.Groups.Modify(1, modification);
+            application.Groups.Modify(1, modification, group);
         }
     }
 }

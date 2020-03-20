@@ -17,19 +17,19 @@ namespace AddressbookTest
         {
         }
 
-        public GroupHelper Remove(int v)
+        public GroupHelper Remove(GroupData group, int v)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectedGroup(v);
+            SelectedGroup(group, v);
             DeleteGroup();
             ReturnToGroupPage();
             return this; 
         }
 
-        public GroupHelper Modify(int v, GroupData modification)
+        public GroupHelper Modify(int v, GroupData modification, GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectedGroup(v);
+            SelectedGroup(group, v);
             InitGroupModification();
             FillGroupForm(modification);
             SubmitGroupModification();
@@ -53,10 +53,33 @@ namespace AddressbookTest
             return this;
         }
 
-        public GroupHelper SelectedGroup(int index)
+        public GroupHelper SelectedGroup(GroupData group, int index)
         {
+            if (IsSelected(index))
+            {
+                if (IsSelected())
+                {
+                    //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+                }
+                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+                return this;
+            }
+            InitNewGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupPage();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
+        }
+
+        public bool IsSelected()
+        {
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[]"));
+        }
+
+        public bool IsSelected(int index)
+        {
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
         }
 
         public GroupHelper FillGroupForm(GroupData group)
