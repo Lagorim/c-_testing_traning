@@ -64,6 +64,14 @@ namespace AddressbookTest
                 driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
                 return this;
             }
+            NewGroupCreate(group, index);            
+            return this;
+        }
+
+        //Метод используется в тот момент, когда нужно создать группу для ее модификации или удаления, при этом сам список пуст
+
+        public GroupHelper NewGroupCreate(GroupData group, int index)
+        {
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();

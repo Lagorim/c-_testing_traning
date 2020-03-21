@@ -95,6 +95,13 @@ namespace AddressbookTest
                 driver.FindElement(By.Name("selected[]")).Click();
                 return this;
                 }
+            NewContactCreate(contact);            
+            return this;
+        }
+
+        //Метод используется в тот момент, когда нужно создать контакт для его модификации или удаления, при этом сам список пуст
+        public ContactHelper NewContactCreate(ContactData contact)
+        {
             manager.Navigator.NewContactPage();
             CreationContact(contact);
             SubmitContact();
