@@ -19,8 +19,23 @@ namespace AddressbookTest
             group.Header = "bbb";
             group.Footer = "vvv";
 
+            application.Groups.SelectedGroup(group, 1);
             application.Groups.Remove(group, 1);
-            
-        }        
+
+            Assert.IsFalse(application.Groups.IsSelected());            
+        }
+
+        [Test]
+        public void CheckGroupAfterDeletion()
+        {
+            GroupData group = new GroupData("aaa");
+            group.Header = "bbb";
+            group.Footer = "vvv";
+
+            application.Groups.SelectedGroup(group, 1);
+            application.Groups.Remove(group, 1);
+
+            Assert.IsTrue(application.Groups.IsSelected(1));
+        }
     }
 }

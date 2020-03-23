@@ -20,7 +20,11 @@ namespace AddressbookTest
             GroupData modification = new GroupData("ccc");
             modification.Header = null;
             modification.Footer = null;
+
+            application.Groups.SelectedGroup(group, 1);
             application.Groups.Modify(1, modification, group);
+
+            Assert.IsTrue(application.Groups.IsSelected(1));
         }
     }
 }

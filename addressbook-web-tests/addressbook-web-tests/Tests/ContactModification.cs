@@ -20,7 +20,11 @@ namespace AddressbookTest
             ContactData contactmodification = new ContactData("Alex");
             contactmodification.MiddleName = "Victorovich";
             contactmodification.LastName = "Moiseev";
+
+            application.Contacts.ChoiceModificationContact(contact);
             application.Contacts.Modification(contactmodification, contact);
+
+            Assert.IsTrue(application.Contacts.Selected());
         }
     }
 }

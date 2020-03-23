@@ -17,8 +17,25 @@ namespace AddressbookTest
             contact.MiddleName = "Victor";
             contact.LastName = "Pronin";
 
+            application.Contacts.ChoiceModificationContact(contact);
             application.Contacts.Remove(contact);
             application.CloseDialogWindow();
+
+            Assert.IsFalse(application.Contacts.Selected());
+        }
+
+        [Test]
+        public void CheckContactAfterDeletion()
+        {
+            ContactData contact = new ContactData("igor");
+            contact.MiddleName = "Victor";
+            contact.LastName = "Pronin";
+
+            application.Contacts.ChoiceModificationContact(contact);
+            application.Contacts.Remove(contact);
+            application.CloseDialogWindow();
+
+            Assert.IsTrue(application.Contacts.Selected());
         }
 
     }

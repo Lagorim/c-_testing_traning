@@ -20,8 +20,8 @@ namespace AddressbookTest
         public GroupHelper Remove(GroupData group, int v)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectedGroup(group, v);
-            DeleteGroup();
+            //SelectedGroup(group, v);
+            DeleteGroup(1);
             ReturnToGroupPage();
             return this; 
         }
@@ -29,8 +29,8 @@ namespace AddressbookTest
         public GroupHelper Modify(int v, GroupData modification, GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectedGroup(group, v);
-            InitGroupModification();
+            //SelectedGroup(group, v);
+            InitGroupModification(1);
             FillGroupForm(modification);
             SubmitGroupModification();
             ReturnToGroupPage();
@@ -55,13 +55,14 @@ namespace AddressbookTest
 
         public GroupHelper SelectedGroup(GroupData group, int index)
         {
+            manager.Navigator.GoToGroupsPage();
             if (IsSelected(index))
             {
                 if (IsSelected())
                 {
                     //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
                 }
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+                //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
                 return this;
             }
             NewGroupCreate(group, index);            
@@ -69,14 +70,12 @@ namespace AddressbookTest
         }
 
         //Метод используется в тот момент, когда нужно создать группу для ее модификации или удаления, при этом сам список пуст
-
         public GroupHelper NewGroupCreate(GroupData group, int index)
         {
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupPage();
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
 
@@ -98,8 +97,9 @@ namespace AddressbookTest
             return this;
         }
 
-        public GroupHelper DeleteGroup()
+        public GroupHelper DeleteGroup(int index)
         {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             driver.FindElement(By.Name("delete")).Click();
             return this;
         }
@@ -122,8 +122,9 @@ namespace AddressbookTest
             return this;
         }
 
-        public GroupHelper InitGroupModification()
+        public GroupHelper InitGroupModification(int index)
         {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }

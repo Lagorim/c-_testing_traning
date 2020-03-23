@@ -30,7 +30,7 @@ namespace AddressbookTest
         public ContactHelper Modification(ContactData contactmodification, ContactData contact)
         {
             manager.Navigator.OpenHomePage();
-            ChoiceModificationContact(contact);
+            //ChoiceModificationContact(contact);
             EditPressButton();
             ModificationContact(contactmodification);
             SubmitModificationContact();
@@ -40,7 +40,7 @@ namespace AddressbookTest
         public ContactHelper Remove(ContactData contact)
         {
             manager.Navigator.OpenHomePage();
-            ChoiceModificationContact(contact);
+            //ChoiceModificationContact(contact);
             RemoveContact();
             return this;
         }
@@ -84,6 +84,7 @@ namespace AddressbookTest
 
         public ContactHelper EditPressButton()
         {
+            driver.FindElement(By.Name("selected[]")).Click();
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
             return this;
         }
@@ -92,7 +93,7 @@ namespace AddressbookTest
         {
             if (Selected())
                 {
-                driver.FindElement(By.Name("selected[]")).Click();
+                //driver.FindElement(By.Name("selected[]")).Click();
                 return this;
                 }
             NewContactCreate(contact);            
@@ -106,11 +107,11 @@ namespace AddressbookTest
             CreationContact(contact);
             SubmitContact();
             manager.Navigator.OpenHomePage();
-            driver.FindElement(By.Name("selected[]")).Click();
+            //driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
 
-        private bool Selected()
+        public bool Selected()
         {
             return IsElementPresent(By.XPath("//tr[@name='entry']"));
         }
