@@ -13,13 +13,13 @@ namespace AddressbookTest
         [Test]
         public void ContactModificationTest()
         {
-            ContactData contact = new ContactData("igor");
+            ContactData contact = new ContactData("igor", "pro");
             contact.MiddleName = "Victor";
-            contact.LastName = "Pronin";
+            //contact.LastName = "Pronin";
 
-            ContactData contactmodification = new ContactData("Alex");
+            ContactData contactmodification = new ContactData("Alex", "po");
             contactmodification.MiddleName = "Victorovich";
-            contactmodification.LastName = "Moiseev";
+            //contactmodification.LastName = "Moiseev";
 
             application.Contacts.ChoiceModificationContact(contact);
             application.Contacts.Modification(contactmodification, contact);

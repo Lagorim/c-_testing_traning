@@ -27,6 +27,23 @@ namespace AddressbookTest
             return this;
         }
 
+        public List<ContactData> GetcontactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenHomePage();
+            //ICollection<IWebElement> elements = driver.FindElements(By.Name("selected[]"));
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                var firstName = element.FindElements(By.XPath("./td"))[2].Text;
+                var lastName = element.FindElements(By.XPath("./td"))[1].Text;
+
+                ContactData contact = new ContactData(firstName, lastName);
+                contacts.Add(contact);
+            }
+            return contacts;
+        }
+
         public ContactHelper Modification(ContactData contactmodification, ContactData contact)
         {
             manager.Navigator.OpenHomePage();
@@ -41,7 +58,7 @@ namespace AddressbookTest
         {
             manager.Navigator.OpenHomePage();
             //ChoiceModificationContact(contact);
-            RemoveContact();
+            Remove();
             return this;
         }
 
@@ -118,6 +135,13 @@ namespace AddressbookTest
 
         public ContactHelper RemoveContact()
         {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper Remove()
+        {
+            driver.FindElement(By.Name("selected[]")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }

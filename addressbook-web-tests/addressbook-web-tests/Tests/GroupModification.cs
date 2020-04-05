@@ -26,5 +26,28 @@ namespace AddressbookTest
 
             Assert.IsTrue(application.Groups.IsSelected(1));
         }
+
+        [Test]
+        public void CheckModificationTest()
+        {
+            GroupData group = new GroupData("aaa");
+            group.Header = "bbb";
+            group.Footer = "vvv";
+
+            GroupData modification = new GroupData("ccc");
+            modification.Header = null;
+            modification.Footer = null;
+
+            //application.Groups.SelectedGroup(group, 1);
+            List<GroupData> oldGroups = application.Groups.GetGroupList();
+            application.Groups.Modify(1, modification, group);
+            List<GroupData> newGroups = application.Groups.GetGroupList();
+            //oldGroups.Add(group);
+            oldGroups[0].Name = modification.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            //Assert.IsTrue(application.Groups.IsSelected(1));
+        }
     }
 }
