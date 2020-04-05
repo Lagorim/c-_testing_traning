@@ -23,7 +23,10 @@ namespace AddressbookTest
             application.Contacts.Create(contact);
 
             List <ContactData> newContacts = application.Contacts.GetcontactList();
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

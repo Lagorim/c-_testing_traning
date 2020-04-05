@@ -54,6 +54,12 @@ namespace AddressbookTest
             manager.Navigator.OpenHomePage();
             return this;
         }
+
+        //public ContactHelper ModificationSort()
+        //{
+        //    manager.Navigator.OpenHomePage();
+        //}
+
         public ContactHelper Remove(ContactData contact)
         {
             manager.Navigator.OpenHomePage();
