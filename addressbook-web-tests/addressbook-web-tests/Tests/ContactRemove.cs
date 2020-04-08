@@ -48,12 +48,47 @@ namespace AddressbookTest
             ContactData contact = new ContactData("igor", "io");
             contact.MiddleName = "Victor";
 
-            List<ContactData> oldContacts = application.Contacts.GetcontactList();
+            List<ContactData> oldContacts = application.Contacts.GetContactList();
             application.Contacts.Remove(contact);
             application.CloseDialogWindow();
-            List<ContactData> newContacts = application.Contacts.GetcontactList();
+
+            List<ContactData> newcontacts = application.Contacts.GetContactList();
+
+            Assert.AreEqual(oldContacts.Count - 1, newcontacts.Count);
+
+            List<ContactData> newContacts = application.Contacts.GetContactList();
+            ContactData toBeRemoved = oldContacts[0];
+
             oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contacts in newContacts)
+            {
+                Assert.AreNotEqual(contacts.Id, toBeRemoved.Id);
+            }
+
+        }
+
+        [Test]
+        public void Delete()
+        {
+            List<ContactData> oldContacts = application.Contacts.GetContactList();
+            application.Contacts.Remove();
+            application.CloseDialogWindow();
+
+            List<ContactData> newcontacts = application.Contacts.GetContactList();
+
+            Assert.AreEqual(oldContacts.Count - 1, newcontacts.Count);
+
+            List<ContactData> newContacts = application.Contacts.GetContactList();
+            ContactData toBeRemoved = oldContacts[0];
+            oldContacts.RemoveAt(0);
+            Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contacts in newContacts)
+            {
+                Assert.AreNotEqual(contacts.Id, toBeRemoved.Id);
+            }
 
         }
     }

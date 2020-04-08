@@ -48,10 +48,21 @@ namespace AddressbookTest
 
             //application.Groups.SelectedGroup(group, 1);
             List<GroupData> oldGroups = application.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[0];
+
             application.Groups.Remove(group, 1);
+
+            Assert.AreEqual(oldGroups.Count - 1, application.Groups.GetGroupCount());
+
             List<GroupData> newGroups = application.Groups.GetGroupList();
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData groups in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+
+            }
         }
     }
 }

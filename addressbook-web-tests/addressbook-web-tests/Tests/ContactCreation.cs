@@ -18,11 +18,13 @@ namespace AddressbookTest
             contact.MiddleName = "Victor";
             //contact.LastName = "Pronin";
 
-            List<ContactData> oldContacts = application.Contacts.GetcontactList();
+            List<ContactData> oldContacts = application.Contacts.GetContactList();
 
             application.Contacts.Create(contact);
 
-            List <ContactData> newContacts = application.Contacts.GetcontactList();
+            Assert.AreEqual(oldContacts.Count +1, application.Contacts.GetContactCount());
+
+            List <ContactData> newContacts = application.Contacts.GetContactList();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();

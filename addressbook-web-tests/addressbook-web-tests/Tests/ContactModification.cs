@@ -38,18 +38,28 @@ namespace AddressbookTest
             contactmodification.MiddleName = "Victorovich";
             //contactmodification.LastName = "Moiseev";
 
+            List<ContactData> oldContacts = application.Contacts.GetContactList();
+            ContactData oldData = oldContacts[0];
 
-
-            List<ContactData> oldContacts = application.Contacts.GetcontactList();
 
             application.Contacts.ChoiceModificationContact(contact);
             application.Contacts.Modification(contactmodification, contact);
 
-            List<ContactData> newContacts = application.Contacts.GetcontactList();
+            Assert.AreEqual(oldContacts.Count, application.Contacts.GetContactCount());
+
+            List<ContactData> newContacts = application.Contacts.GetContactList();
             oldContacts[0].Name = contactmodification.Name;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contacts in newContacts)
+            {
+                if (contacts.Id == oldData.Id)
+                {
+                    Assert.AreEqual(contactmodification.Name, contacts.Name);
+                }
+            }
         }
     }
 }

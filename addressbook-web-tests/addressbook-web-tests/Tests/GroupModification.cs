@@ -40,7 +40,12 @@ namespace AddressbookTest
 
             //application.Groups.SelectedGroup(group, 1);
             List<GroupData> oldGroups = application.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
+
             application.Groups.Modify(1, modification, group);
+
+            Assert.AreEqual(oldGroups.Count, application.Groups.GetGroupCount());
+
             List<GroupData> newGroups = application.Groups.GetGroupList();
             //oldGroups.Add(group);
             oldGroups[0].Name = modification.Name;
@@ -48,6 +53,14 @@ namespace AddressbookTest
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
             //Assert.IsTrue(application.Groups.IsSelected(1));
+
+            foreach (GroupData groups in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(modification.Name, group.Name);
+                }
+            }
         }
     }
 }

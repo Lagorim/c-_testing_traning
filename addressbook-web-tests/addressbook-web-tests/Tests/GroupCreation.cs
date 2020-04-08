@@ -21,7 +21,11 @@ namespace AddressbookTest
             group.Footer = "ccc";
 
             List<GroupData> oldGroups = application.Groups.GetGroupList();
+            
             application.Groups.Create(group);
+
+            Assert.AreEqual(oldGroups.Count + 1, application.Groups.GetGroupCount());
+
             List<GroupData> newGroups = application.Groups.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
@@ -37,7 +41,11 @@ namespace AddressbookTest
             group.Footer = "";
 
             List<GroupData> oldGroups = application.Groups.GetGroupList();
+
             application.Groups.Create(group);
+
+            Assert.AreEqual(oldGroups.Count + 1, application.Groups.GetGroupCount());
+
             List<GroupData> newGroups = application.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
@@ -50,7 +58,11 @@ namespace AddressbookTest
             group.Footer = "";
 
             List<GroupData> oldGroups = application.Groups.GetGroupList();
+
             application.Groups.Create(group);
+
+            Assert.AreEqual(oldGroups.Count + 1, application.Groups.GetGroupCount());
+
             List<GroupData> newGroups = application.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
