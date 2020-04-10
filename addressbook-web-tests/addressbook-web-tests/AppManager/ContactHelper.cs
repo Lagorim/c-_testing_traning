@@ -1,12 +1,7 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 namespace AddressbookTest
 {
@@ -99,6 +94,11 @@ namespace AddressbookTest
             return this;
         }
 
+        public void InitModificationContact(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index].FindElement(By.XPath("//img[@alt='Edit']")).Click();
+        }
+
         public ContactHelper ChoiceModificationContact(ContactData contact)
         {
             if (Selected())
@@ -172,6 +172,61 @@ namespace AddressbookTest
         public int GetContactCount()
         {
             return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
+        }
+
+        public ContactData GetcontactInformationFromTable(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+            string lastName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allEmails = cells[4].Text;
+            string allPhones = cells[5].Text;
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                AllPhones = allPhones,
+                AllEmails = allEmails,
+                //Email2 = email2,
+                //Email3 = email3
+            };
+        }
+
+        public ContactData GetContactInformationFromEdit(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            InitModificationContact(0);
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string email1 = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone,
+                Email1 = email1,
+                Email2 = email2,
+                Email3 = email3
+            };
+        }
+
+        public int GetNumberOfResults()
+        {
+            manager.Navigator.OpenHomePage();
+            return driver.FindElements(By.XPath("//span[@id='search_count']")).Count;
+            //Match m = new Regex(@"\w+").Match(text);
+            //return text;
+                
         }
     }
 }
