@@ -99,6 +99,11 @@ namespace AddressbookTest
             driver.FindElements(By.Name("entry"))[index].FindElement(By.XPath("//img[@alt='Edit']")).Click();
         }
 
+        public void DetailPageOpen(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index].FindElement(By.XPath("//td[7]//a[1]")).Click();
+        }
+
         public ContactHelper ChoiceModificationContact(ContactData contact)
         {
             if (Selected())
@@ -189,8 +194,6 @@ namespace AddressbookTest
                 Address = address,
                 AllPhones = allPhones,
                 AllEmails = allEmails,
-                //Email2 = email2,
-                //Email3 = email3
             };
         }
 
@@ -216,8 +219,58 @@ namespace AddressbookTest
                 WorkPhone = workPhone,
                 Email1 = email1,
                 Email2 = email2,
-                Email3 = email3
+                Email3 = email3,
+                InformationDetail = firstName + lastName + "\r\n" + address + PhoneVerification(homePhone)+
+                PhoneVerification(mobilePhone) + PhoneVerification(workPhone) + "\r\n" + email1 + "\r\n" + 
+                email2 + "\r\n" + email3 +"\r\n"
             };
+            string PhoneVerification(string phone)
+            {
+                if (phone != "")
+                {
+                    if (phone == homePhone || phone == workPhone)
+                    {
+                        if (phone == homePhone)
+                        {
+                            return "H:" + phone + "\r\n";
+                        }
+                        return "M:" + phone + "\r\n";
+                    }
+                    return "W:" + phone + "\r\n";
+                }
+                return phone;
+            }
+        }
+
+        //private string PhoneVerification(string phone)
+        //{
+        //    if (phone != "")
+        //    {
+        //        if (phone == homePhone || phone == workPhone)
+        //        {
+        //            if (phone == homePhone)
+        //            {
+        //                return "H:" + phone + "\r\n";
+        //            }
+        //            return "M:" + phone + "\r\n";
+        //        }
+        //        return "W:" + phone + "\r\n";
+        //    }
+        //    return phone;
+        //}
+
+        public ContactData GetContactInfomationDetail()
+        {
+            manager.Navigator.OpenHomePage();
+            DetailPageOpen(0);
+            string detailInformation = driver.FindElement(By.XPath("//div[@id='content']")).Text;
+            string firstName = "";
+            string lastName = "";
+            return new ContactData(firstName, lastName)
+            {
+                InformationDetail = detailInformation,
+            };
+
         }
 
         public int GetNumberOfResults()

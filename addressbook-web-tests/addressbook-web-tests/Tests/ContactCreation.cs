@@ -15,7 +15,7 @@ namespace AddressbookTest
         public void ContactCreationTest()
         {
             ContactData contact = new ContactData("igor", "pronin");
-            contact.MiddleName = "Victor";
+            //contact.MiddleName = "Victor";
             //contact.LastName = "Pronin";
 
             List<ContactData> oldContacts = application.Contacts.GetContactList();

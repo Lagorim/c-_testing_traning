@@ -11,11 +11,13 @@ namespace AddressbookTest
     {
         private string allPhones;
         private string allEmails;
+        private string detailInformation;
 
         public ContactData(string name, string lastname)
         {
             Name = name;
             LastName = lastname;
+            
         }
 
         public bool Equals(ContactData other)
@@ -128,5 +130,16 @@ namespace AddressbookTest
 
         public string Email3 { get; set; }
 
+        public string InformationDetail 
+        {
+            get 
+            {
+                return CleanUp(detailInformation).Trim();
+            }
+            set
+            {
+                detailInformation = value;
+            }
+        }
     }
 }

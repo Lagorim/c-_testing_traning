@@ -25,5 +25,14 @@ namespace AddressbookTest
             Assert.NotNull(application.Contacts.GetNumberOfResults());
         }
 
+        [Test]
+        public void TestContactInformationDetailPage()
+        {
+            ContactData fromForm = application.Contacts.GetContactInformationFromEdit(0);
+            ContactData detailForm = application.Contacts.GetContactInfomationDetail();
+
+            Assert.AreEqual(fromForm.InformationDetail, detailForm.InformationDetail);
+        }
+
     }
 }
