@@ -11,12 +11,23 @@ namespace AddressbookTest
     [TestFixture]
     public class ContactCreation : AuthBaseTest
     {
-        [Test]
-        public void ContactCreationTest()
+        public static IEnumerable<ContactData> RandomContactDataProvider()
         {
-            ContactData contact = new ContactData("igor", "pronin");
-            //contact.MiddleName = "Victor";
-            //contact.LastName = "Pronin";
+            List<ContactData> contacts = new List<ContactData>();
+            for (int i = 0; i < 5; i++)
+            {
+                contacts.Add(new ContactData(GeneraterandomString(20), GeneraterandomString(30))
+                {
+                    LastName = GeneraterandomString(50),
+                    MiddleName = GeneraterandomString(50)
+                });
+            }
+            return contacts;
+        }
+
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void ContactCreationTest(ContactData contact)
+        {
 
             List<ContactData> oldContacts = application.Contacts.GetContactList();
 

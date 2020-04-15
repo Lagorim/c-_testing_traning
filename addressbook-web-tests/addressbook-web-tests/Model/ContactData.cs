@@ -40,7 +40,7 @@ namespace AddressbookTest
 
         public override string ToString()
         {
-            return "Firstname = " + Name + " " +LastName;
+            return "Firstname = " + Name + " " +LastName + "\nMiddlename = " + MiddleName;
         }
 
         public int CompareTo(ContactData other)
