@@ -13,6 +13,18 @@ namespace AddressbookTest
         private string allEmails;
         private string detailInformation;
 
+        public ContactData()
+        {
+
+        }
+
+        public ContactData(string name)
+        {
+            Name = name;
+            //LastName = lastname;
+
+        }
+
         public ContactData(string name, string lastname)
         {
             Name = name;
